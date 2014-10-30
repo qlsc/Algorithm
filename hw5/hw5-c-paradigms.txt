@@ -1,0 +1,76 @@
+				C Paradigms
+
+Here are some C programming paradigms that may help you in programming
+the cache simulator.
+
+I will assume that the cache is a global variable.  (n Jave, the analogue
+would be a class variable.  You can use the variable directly by name even
+though it is not a local variable.
+
+  struct row { int valid; int tag; struct row *prev };
+  struct row *firstRow = NULL;
+  struct row cache[5000];
+  int maxCacheIndex;
+
+Useful for direct-mapped cache:
+  // Omitting offset; don't need it for this simulation
+  int isHitOrMissForDirectMapped( int tag, int index );
+  int main () {
+    for (...) {
+      ... get next address ...
+      tag = ...;
+      index = ...;
+      // We declared isHitOrMissForDirectMapped above.  But we define it below.
+      answer = isHitOrMissForDirectMapped( tag, index );
+      if (answer)
+        printf("address(%d) Hit\n", address);
+      else
+        printf("address(%d) Miss\n", address);
+      ...
+    }
+    return 0;  // The fnc main returns 0 for success.  Anything else is error number.
+  }
+  int isHitOrMissForDirectMapped( int tag, int index ) {
+    int rowIdx = 0;
+    // For direct-mapped, index is the cache line number.
+    if ( cache[index].valid && cache[index].tag == tag )
+      isHit = true;
+    else
+      isHit = false;
+    ...
+    return isHit;
+  }
+
+
+Useful for  k-way set associative cache :
+  int isHitOrMissForSetAssoc( int k, int tag, int index ) {
+    int isHit = 0;  // Initialize isHit to default value:  false
+    int rowIdx = 0;
+    // For set associative, index is the set number.
+    for ( rowIdx = k*index; rowIdx < k*index + k; rowIdx++ )
+      if ( cache[rowIdx].valid && cache[rowIdx].tag == tag ) {
+        isHit = true;
+        break;
+      }
+    }
+    // Now, isHit has value true if and only if we found a hit.
+    if (isHit) return 1; // return true
+    // Else search for cache line with valid field == 0 (false)
+    for ( rowIdx = k*index; rowIdx < k*index + k; rowIdx++ )
+      if ( cache[rowIdx].valid ) == 0 )
+        break;
+    // If we didn't find a cache line with valid field false, then evict cache line
+    if (rowIdx + k >= k*index) { // if falied to find invalid cache line
+      ...
+    }
+    return isHit;
+  }
+
+An eviction policy of fully associative or k-way set associative caches is needed.
+You'll need to keep a FIFO list.  There are several ways to do this.
+One way is to use a linked list.  (See definition of "prev" above.)
+Another way is to keep an int timestamp in "struct row", and then when looking
+  for the oldest row to evict, look for the earliest timestamp.
+A third way is to keep a variable that points to the oldest row used.  When
+  we evict it, notice that the next row in the same set will now be the
+  oldest row that was used.

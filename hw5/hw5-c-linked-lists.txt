@@ -1,0 +1,53 @@
+// We want to implement a FIFO policy for the cache lines of each set
+//   in a set associative cache.  Here is one possible way to implement it.
+// Recall that in C, x->next  means  (*x).next
+
+// This code creates a freeList and a usedList for each set in a
+//   set-associative cache.  The rows of the cache (each cache[idx], which
+//   is of type 'struct cacheLine') always stay at a fixed memory address.
+//   The 'next' field of each 'struct cacheLine' changes to represent the
+//   linked list.  But the 'next' field in the 'struct cacheLine' changes.
+//   So, each cache[idx] will appear on exactly one linked list.
+// If there are 'numSets', then the linked lists will be:
+//   freeList[0], usedList[0], ..., freeList[numSets-1], usedList[numSets-1]
+
+struct cacheLine {
+  int valid;
+  int tag;
+  struct cacheLine *next;
+};;;;
+struct cacheLine cache[10000];
+// Initialize all valid fields to 0 (false)
+
+// One free and one used linked list for each set
+struct freeList[numSets];
+struct usedList[numSets];
+
+// Initialize usedList[] and freeList[]
+  for (set = 0; set < numSets; set++) {
+    usedList[set] = NULL;
+    freeList[set] = & cache[set * LinesPerSet];
+  }
+  for (set = 0; set < numSets; set++) {
+    for (index = set*linesPerSet; index < (set+1)*linesPerSet; index++) {
+      cache[index].next = & cache[index+1];
+    }
+    cache[(set+1)*linesPerSet - 1].next = NULL;
+  }
+
+// FUNCTION:  getFreeCacheLine(int set)
+// EXAMPLE USAGE:
+//  struct cacheLine * myCacheLine = getFreeCacheLine(set);
+//  assert(myCacheLine->valid == 0);
+//  mycacheLine->tag = newTagFromCPU;
+//  mycacheLine->valid = 1;
+struct cacheLine * getFreeCacheLine(int set) {
+  if (freeList[set] == NULL)
+    evictCacheLine(int set);
+  // Now we know that freeList[set] points to a real cache line
+  struct cacheLine * tmp = freeList[set];
+  freeList[set] = tmp->next; // Now freeList[set] is correct.
+  tmp->next = usedList[set];
+  usedList[set] = tmp; // Now usedList[set] is correct.
+  return usedList[set]; // Return a pointer to the cacheLine we took from the free list
+}

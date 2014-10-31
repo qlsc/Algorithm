@@ -1,6 +1,6 @@
 # First target is default target, if you just type:  make
 
-FILE=hw4.c
+FILE=main.c
 
 default: run
 

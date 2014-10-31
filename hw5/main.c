@@ -18,7 +18,7 @@
 #define HIT  1
 #define MISS 0
 
-#define powf(x,y)     ((float)powf((double)(x),(double)(y)))
+#define powf(x,y)     (float)pow((double)(x),(double)(y))
 #define log2f(x)     ((float)log((double)(x)))/(log((double)2))
 
 typedef struct {

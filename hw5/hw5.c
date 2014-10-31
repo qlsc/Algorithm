@@ -144,7 +144,7 @@ void printVisitAll(Cache *cache, int len, int addrs[])
         // The output of this program
         //test 
         //printf(" %2d    %2d     %2d       %2d       %s \n", addrs[i],tag, index, offset, hit ? "HIT" : "MISS");
-        printf("(%i : %s)\n", addrs[x], hit ? "HIT" : "MISS");
+        printf("(%i : %s)\n", addrs[i], hit ? "HIT" : "MISS");
     }
     
     printf("]\n\n");
@@ -163,13 +163,13 @@ int main(int argc, char *argv[])
         0,  4,  8,  12, 16, 20, 24, 28,32, 36, 40, 44, 48, 52, 56, 60,64, 68, 72,
         76, 80, 0,  4,  8, 12, 16, 71, 3,  41, 81, 39, 38, 71, 15, 39, 11, 51, 57, 41};
         
-    
+    //a 128-byte, direct-mapped cache with 8-byte cache lines (cache blocks)
     Cache cache1 = createCache(128, 16, 8);
-    
+    //a 64-byte, 2-way set associative cache with 8-byte cache lines (cache blocks)
     Cache cache2 = createCache(64,  2, 8);
-    
+    //a 128-byte, direct-mapped cache with 16-byte cache lines (cache blocks)
     Cache cache3 = createCache(128, 8, 16);
-    
+    //a 64-byte, fully associative cache with 8-byte cache lines (cache blocks)
     Cache cache4 = createCache(64,  1, 8);
     
     printVisitAll(&cache1, length, addrs);

@@ -1,17 +1,17 @@
 # First target is default target, if you just type:  make
 
-FILE=main.c
+FILE=hw5.c
 
 default: run
 
-run: myshell
-	./myshell
+run: hw5
+	./hw5
 
-gdb: myshell
-	gdb myshell
+gdb: hw5
+	gdb hw5
 
-myshell: ${FILE}
-	gcc -g -O0 -o myshell ${FILE} -lm
+hw5: ${FILE}
+	gcc -g -O0 -o hw5 ${FILE} -lm
 
 emacs: ${FILE}
 	emacs ${FILE}
@@ -19,7 +19,7 @@ vi: ${FILE}
 	vi ${FILE}
 
 clean:
-	rm -f myshell a.out *~
+	rm -f hw5 a.out *~
 
 # 'make' will view $v as variable and try to expand it.
 # By typing $$, make will reduce it to a single '$' and pass it to the shell.

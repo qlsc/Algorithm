@@ -1,6 +1,7 @@
 //
 //  hw5.c
 //  cs3650
+//  LRU policy
 
 
 #include <stdio.h>
@@ -152,21 +153,17 @@ int main(int argc, char *argv[])
     printf("homework5\n\n");
     
      static int testaddrs[] = {1, 4, 8, 5, 20, 17, 19, 56, 9, 11, 4, 43, 5, 6, 9, 17};
-    Cache cache = createCache(30, 4, 0);//64, 2, 4
+    Cache cache = createCache(64, 2, 4);// size,n-way,line-size
     printVisitAll(&cache, 16, testaddrs);
     
     /*static int length = 39;
     static int addrs[] = {
-        0,  4,  8,  12, 16, 20, 24, 28,
-        32, 36, 40, 44, 48, 52, 56, 60,
-        64, 68, 72, 76, 80, 0,  4,  8,
-        12, 16, 71, 3,  41, 81, 39, 38,
-        71, 15, 39, 11, 51, 57, 41
-    };
+        0,  4,  8,  12, 16, 20, 24, 28,32, 36, 40, 44, 48, 52, 56, 60,64, 68, 72,
+        76, 80, 0,  4,  8, 12, 16, 71, 3,  41, 81, 39, 38, 71, 15, 39, 11, 51, 57, 41};
     
-    Cache cache1 = createCache(128, 16, 8);
+    Cache cache1 = createCache(128, 16, 8);//
     Cache cache2 = createCache(64,  2, 8);
-    Cache cache3 = createCache(128, 8, 16);
+    Cache cache3 = createCache(128, 8, 16);//
     Cache cache4 = createCache(64,  1, 8);
     
     printVisitAll(&cache1, length, addrs);

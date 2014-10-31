@@ -152,7 +152,7 @@ int main(int argc, char *argv[])
     printf("homework5\n\n");
     
      static int testaddrs[] = {1, 4, 8, 5, 20, 17, 19, 56, 9, 11, 4, 43, 5, 6, 9, 17};
-    Cache cache = createCache(64, 2, 4);//
+    Cache cache = createCache(30, 4, 0);//64, 2, 4
     printVisitAll(&cache, 16, testaddrs);
     
     /*static int length = 39;

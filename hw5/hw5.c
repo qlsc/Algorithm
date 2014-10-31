@@ -144,7 +144,7 @@ void printVisitAll(Cache *cache, int len, int addrs[])
         // The output of this program
         //test 
         //printf(" %2d    %2d     %2d       %2d       %s \n", addrs[i],tag, index, offset, hit ? "HIT" : "MISS");
-        printf("(%i : %s)\n", addrs[i], hit ? "HIT" : "MISS");
+        printf("(%2d : %s)\n", addrs[i], hit ? "HIT" : "MISS");
     }
     
     printf("]\n\n");

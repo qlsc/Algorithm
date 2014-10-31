@@ -39,15 +39,16 @@ typedef struct {
 
 Cache buildCache(int s, int n, int l)
 {
+	int i,j;
     Cache cache = {s,n,l};
-    for (int x = 0; x < n; x++) {
+    for (i = 0; i < n; i++) {
         int rows = s / ( n * l );
         Set set = {rows};
-        for (int z = 0; z < set.numRows; z++) {
+        for (j = 0; j < set.numRows; j++) {
             Row row = {0, 0, -1, l};
-            set.rows[z] = row; // add row to set
+            set.rows[j] = row; // add row to set
         }
-        cache.sets[x] = set; // add set to cache
+        cache.sets[i] = set; // add set to cache
     }
     return cache;
 }
@@ -56,11 +57,11 @@ int visit(Set *set, int tag, int offset)
 {
     time_t low = INT32_MAX;
     int low_i = set->numRows - 1;
-    
-    for (int x = 0; x < set->numRows; x++) {
+    int i;
+    for (i = 0; i < set->numRows; i++) {
         
         // get row
-        Row *row = &set->rows[x];
+        Row *row = &set->rows[i];
         
         // If the tag is found
         if (row->tag == tag) {
@@ -79,7 +80,7 @@ int visit(Set *set, int tag, int offset)
         }
         
         // If the tag is not found and set is full, evict lowest version
-        if (x == set->numRows - 1) {
+        if (i == set->numRows - 1) {
             Row *rowl = &set->rows[low_i];
             rowl->tag = tag;
             time(&rowl->time);
@@ -112,16 +113,17 @@ void visitAll(Cache *cache, int len, int adrs[])
     int INDEX_SIZE = powf(2, INDEX_BITS) - 1;
     
     // loop through addresses and visit each
-    for (int x = 0; x < len; x++) {
+	int i,j;
+    for (i = 0; i < len; i++) {
         
         // get address
-        int adr = adrs[x];
+        int adr = adrs[i];
         
         // compute tag, index, offset
         int offset, index, tag;
         offset = index = tag = 0;
         
-        for (int x = 0; x < adr; x++) {
+        for (j = 0; j < adr; j++) {
             offset++;
             if (offset > OFFSET_SIZE) {
                 offset = 0;
@@ -141,7 +143,7 @@ void visitAll(Cache *cache, int len, int adrs[])
         
         // log to console
 //        printf("%d %d %d\n", tag, index, offset);
-        printf("(%i : %s)\n", adrs[x], hit ? "HIT" : "MISS");
+        printf("(%i : %s)\n", adrs[i], hit ? "HIT" : "MISS");
     }
     
     printf("]\n\n");
@@ -149,7 +151,7 @@ void visitAll(Cache *cache, int len, int adrs[])
 
 int main(int argc, char *argv[])
 {
-    printf("HW6 - abarba\n\n");
+    printf("HW5\n\n");
     
     static int len = 39;
     static int adrs[] = {

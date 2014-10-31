@@ -97,7 +97,7 @@ int visit(Set *set, int tag, int offset)
 
 void visitAll(Cache *cache, int len, int addrs[])
 {
-    printf("Cache: (%i, %i, %i) [\n",cache->s,cache->n,cache->l);
+    printf("Cache: (%i, %i, %i) \n",cache->s,cache->n,cache->l);
     printf("addr  tag  index word_offset hit/miss\n");
     // compute number of rows per set
     int rows = (cache->s / cache->l) / cache->n;
@@ -144,7 +144,7 @@ void visitAll(Cache *cache, int len, int addrs[])
         printf(" %2d    %2d     %2d       %2d       %s \n", addrs[i],tag, index, offset, hit ? "hit" : "miss");
     }
     
-    printf("]\n\n");
+    printf("\n\n");
 }
 
 int main(int argc, char *argv[])
@@ -160,7 +160,7 @@ int main(int argc, char *argv[])
         71, 15, 39, 11, 51, 57, 41
     };
     
-  /*  Cache cache1 = createCache(128, 16, 8);
+    Cache cache1 = createCache(128, 16, 8);
     Cache cache2 = createCache(64,  2, 8);
     Cache cache3 = createCache(128, 8, 16);
     Cache cache4 = createCache(64,  1, 8);
@@ -168,11 +168,11 @@ int main(int argc, char *argv[])
     visitAll(&cache1, len, addrs);
     visitAll(&cache2, len, addrs);
     visitAll(&cache3, len, addrs);
-    visitAll(&cache4, len, addrs);*/
+    visitAll(&cache4, len, addrs);
     
-    static int testaddrs[] = {1, 4, 8, 5, 20, 17, 19, 56, 9, 11, 4, 43, 5, 6, 9, 17};
+   /* static int testaddrs[] = {1, 4, 8, 5, 20, 17, 19, 56, 9, 11, 4, 43, 5, 6, 9, 17};
     Cache cache = createCache(64, 2, 4);
-    visitAll(&cache, 16, testaddrs);
+    visitAll(&cache, 16, testaddrs);*/
     
     return 0;
 }

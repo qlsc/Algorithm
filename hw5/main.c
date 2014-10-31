@@ -37,10 +37,10 @@ typedef struct {
     Set sets[MAX_SETS];
 } Cache;
 
-Cache createCache(int s, int n, int l)
+Cache buildCache(int s, int n, int l)
 {
     Cache cache = {s,n,l};
-    for (int i = 0; i < n; i++) {
+    for (int x = 0; x < n; x++) {
         int rows = s / ( n * l );
         Set set = {rows};
         for (int z = 0; z < set.numRows; z++) {
@@ -149,7 +149,7 @@ void visitAll(Cache *cache, int len, int adrs[])
 
 int main(int argc, char *argv[])
 {
-    printf("HW5  \n\n");
+    printf("HW6 - abarba\n\n");
     
     static int len = 39;
     static int adrs[] = {
@@ -160,19 +160,19 @@ int main(int argc, char *argv[])
         71, 15, 39, 11, 51, 57, 41
     };
     
-    Cache ex1 = createCache(128, 16, 8);
-    Cache ex2 = createCache(64,  2, 8);
-    Cache ex3 = createCache(128, 8, 16);
-    Cache ex4 = createCache(64,  1, 8);
+    Cache ex1 = buildCache(128, 16, 8);
+    Cache ex2 = buildCache(64,  2, 8);
+    Cache ex3 = buildCache(128, 8, 16);
+    Cache ex4 = buildCache(64,  1, 8);
     
     visitAll(&ex1, len, adrs);
     visitAll(&ex2, len, adrs);
     visitAll(&ex3, len, adrs);
     visitAll(&ex4, len, adrs);
     
-  /*static int tadrs[] = {1, 4, 8, 5, 20, 17, 19, 56, 9, 11, 4, 43, 5, 6, 9, 17};
-    Cache t = createCache(64, 2, 4);
-    visitAll(&t, 16, tadrs);
-    */
+//    static int tadrs[] = {1, 4, 8, 5, 20, 17, 19, 56, 9, 11, 4, 43, 5, 6, 9, 17};
+//    Cache t = buildCache(64, 2, 4);
+//    visitAll(&t, 16, tadrs);
+    
     return 0;
 }

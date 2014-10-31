@@ -1,10 +1,7 @@
 //
-//  main.c
+//  hw5.c
 //  cs3650
-//
-//  Created by Andrew Barba on 10/24/14.
-//  Copyright (c) 2014 Andrew Barba. All rights reserved.
-//
+
 
 #include <stdio.h>
 #include <time.h>
@@ -17,9 +14,6 @@
 
 #define HIT  1
 #define MISS 0
-
-//#define powf(x,y)     (float)pow((double)(x),(double)(y))
-//#define log2f(x)     ((float)log((double)(x)))/(log((double)2))
 
 typedef struct {
     int valid;
@@ -41,7 +35,7 @@ typedef struct {
     Set sets[MAX_SETS];
 } Cache;
 
-Cache buildCache(int s, int n, int l)
+Cache createCache(int s, int n, int l)
 {
 	int i,j;
     Cache cache = {s,n,l};
@@ -155,7 +149,7 @@ void visitAll(Cache *cache, int len, int adrs[])
 
 int main(int argc, char *argv[])
 {
-    printf("HW5\n\n");
+    printf("homework5\n\n");
     
     static int len = 39;
     static int adrs[] = {
@@ -166,19 +160,19 @@ int main(int argc, char *argv[])
         71, 15, 39, 11, 51, 57, 41
     };
     
-    Cache ex1 = buildCache(128, 16, 8);
-    Cache ex2 = buildCache(64,  2, 8);
-    Cache ex3 = buildCache(128, 8, 16);
-    Cache ex4 = buildCache(64,  1, 8);
+  /*  Cache ex1 = createCache(128, 16, 8);
+    Cache ex2 = createCache(64,  2, 8);
+    Cache ex3 = createCache(128, 8, 16);
+    Cache ex4 = createCache(64,  1, 8);
     
     visitAll(&ex1, len, adrs);
     visitAll(&ex2, len, adrs);
     visitAll(&ex3, len, adrs);
-    visitAll(&ex4, len, adrs);
+    visitAll(&ex4, len, adrs);*/
     
-//    static int tadrs[] = {1, 4, 8, 5, 20, 17, 19, 56, 9, 11, 4, 43, 5, 6, 9, 17};
-//    Cache t = buildCache(64, 2, 4);
-//    visitAll(&t, 16, tadrs);
+    static int tadrs[] = {1, 4, 8, 5, 20, 17, 19, 56, 9, 11, 4, 43, 5, 6, 9, 17};
+    Cache t = createCache(64, 2, 4);
+    visitAll(&t, 16, tadrs);
     
     return 0;
 }

@@ -140,8 +140,8 @@ void visitAll(Cache *cache, int len, int addrs[])
         int hit = visit(set, tag, offset);
         
         // log to console
-	     printf("%d %d %d\n", tag, index, offset);
-        printf("(%i : %s)\n", addrs[i], hit ? "hit" : "miss");
+	    
+        printf(" %i %d %d %d : %s \n", addrs[i],tag, index, offset, hit ? "hit" : "miss");
     }
     
     printf("]\n\n");

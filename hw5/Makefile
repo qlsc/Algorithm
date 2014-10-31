@@ -11,7 +11,7 @@ gdb: myshell
 	gdb myshell
 
 myshell: ${FILE}
-	gcc -g -O0 -o myshell ${FILE}
+	gcc -g -O0 -o myshell ${FILE} -lm
 
 emacs: ${FILE}
 	emacs ${FILE}

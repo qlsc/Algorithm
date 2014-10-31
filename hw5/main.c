@@ -10,6 +10,7 @@
 #include <time.h>
 #include <math.h>
 #include <stdint.h>
+#include <syslib.h>
 
 #define MAX_CACHE_LINES 32
 #define MAX_ROWS 256
@@ -17,6 +18,8 @@
 
 #define HIT  1
 #define MISS 0
+
+#define log2f(x)     ((float)log((double)(x)))/(log((double)2))
 
 typedef struct {
     int valid;

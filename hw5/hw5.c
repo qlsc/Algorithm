@@ -51,7 +51,7 @@ Cache createCache(int s, int n, int l)
     return cache;
 }
 
-int visit(Set *set, int tag, int offset)
+int isHit(Set *set, int tag, int offset)
 {
     time_t low = INT32_MAX;
     int low_i = set->numRows - 1;
@@ -95,7 +95,7 @@ int visit(Set *set, int tag, int offset)
     return MISS;
 }
 
-void visitAll(Cache *cache, int len, int addrs[])
+void printVisitAll(Cache *cache, int len, int addrs[])
 {
     printf("Cache: (%i, %i, %i) \n",cache->s,cache->n,cache->l);
     printf("addr  tag  index word_offset hit/miss\n");
@@ -137,7 +137,7 @@ void visitAll(Cache *cache, int len, int addrs[])
         Set *set = &cache->sets[index];
         
         // test for hit
-        int hit = visit(set, tag, offset);
+        int hit = isHit(set, tag, offset);
         
         // log to console
 	    
@@ -151,7 +151,11 @@ int main(int argc, char *argv[])
 {
     printf("homework5\n\n");
     
-    static int len = 39;
+     static int testaddrs[] = {1, 4, 8, 5, 20, 17, 19, 56, 9, 11, 4, 43, 5, 6, 9, 17};
+    Cache cache = createCache(64, 2, 4);//
+    printVisitAll(&cache, 16, testaddrs);
+    
+    /*static int length = 39;
     static int addrs[] = {
         0,  4,  8,  12, 16, 20, 24, 28,
         32, 36, 40, 44, 48, 52, 56, 60,
@@ -165,14 +169,10 @@ int main(int argc, char *argv[])
     Cache cache3 = createCache(128, 8, 16);
     Cache cache4 = createCache(64,  1, 8);
     
-    visitAll(&cache1, len, addrs);
-    visitAll(&cache2, len, addrs);
-    visitAll(&cache3, len, addrs);
-    visitAll(&cache4, len, addrs);
-    
-   /* static int testaddrs[] = {1, 4, 8, 5, 20, 17, 19, 56, 9, 11, 4, 43, 5, 6, 9, 17};
-    Cache cache = createCache(64, 2, 4);
-    visitAll(&cache, 16, testaddrs);*/
-    
+    printVisitAll(&cache1, length, addrs);
+    printVisitAll(&cache2, length, addrs);
+    printVisitAll(&cache3, length, addrs);
+    printVisitAll(&cache4, length, addrs);
+    */
     return 0;
 }

@@ -170,9 +170,9 @@ int main(int argc, char *argv[])
     visitAll(&cache3, len, addrs);
     visitAll(&cache4, len, addrs);*/
     
-    static int addrs[] = {1, 4, 8, 5, 20, 17, 19, 56, 9, 11, 4, 43, 5, 6, 9, 17};
+    static int testaddrs[] = {1, 4, 8, 5, 20, 17, 19, 56, 9, 11, 4, 43, 5, 6, 9, 17};
     Cache cache = createCache(64, 2, 4);
-    visitAll(&cache, 16, addrs);
+    visitAll(&cache, 16, testaddrs);
     
     return 0;
 }

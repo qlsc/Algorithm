@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <math.h>
+#include <stdint.h>
 
 #define MAX_CACHE_LINES 32
 #define MAX_ROWS 256
@@ -88,7 +89,7 @@ int visit(Set *set, int tag, int offset)
             return MISS;
         } else {
             if (row->time < low) {
-                low_i = x;
+                low_i = i;
                 low = row->time;
             }
         }

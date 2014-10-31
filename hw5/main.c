@@ -37,7 +37,7 @@ typedef struct {
     Set sets[MAX_SETS];
 } Cache;
 
-Cache createCache(int s, int n, int l)
+Cache buildCache(int s, int n, int l)
 {
     Cache cache = {s,n,l};
     for (int i = 0; i < n; i++) {
@@ -160,10 +160,10 @@ int main(int argc, char *argv[])
         71, 15, 39, 11, 51, 57, 41
     };
     
-    Cache ex1 = createCache(128, 16, 8);
-    Cache ex2 = createCache(64,  2, 8);
-    Cache ex3 = createCache(128, 8, 16);
-    Cache ex4 = createCache(64,  1, 8);
+    Cache ex1 = buildCache(128, 16, 8);
+    Cache ex2 = buildCache(64,  2, 8);
+    Cache ex3 = buildCache(128, 8, 16);
+    Cache ex4 = buildCache(64,  1, 8);
     
     visitAll(&ex1, len, adrs);
     visitAll(&ex2, len, adrs);
@@ -171,7 +171,7 @@ int main(int argc, char *argv[])
     visitAll(&ex4, len, adrs);
     
   /*static int tadrs[] = {1, 4, 8, 5, 20, 17, 19, 56, 9, 11, 4, 43, 5, 6, 9, 17};
-    Cache t = createCache(64, 2, 4);
+    Cache t = buildCache(64, 2, 4);
     visitAll(&t, 16, tadrs);
     */
     return 0;

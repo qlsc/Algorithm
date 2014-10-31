@@ -141,35 +141,36 @@ void printVisitAll(Cache *cache, int len, int addrs[])
         int hit = isHit(set, tag, offset);
         
         // log to console
-	    
         printf(" %2d    %2d     %2d       %2d       %s \n", addrs[i],tag, index, offset, hit ? "hit" : "miss");
     }
-    
-    printf("\n\n");
+    printf("\n");
 }
 
 int main(int argc, char *argv[])
 {
     printf("homework5\n\n");
     
-     static int testaddrs[] = {1, 4, 8, 5, 20, 17, 19, 56, 9, 11, 4, 43, 5, 6, 9, 17};
+    /*static int testaddrs[] = {1, 4, 8, 5, 20, 17, 19, 56, 9, 11, 4, 43, 5, 6, 9, 17};
     Cache cache = createCache(64, 2, 4);// size,n-way,line-size
     printVisitAll(&cache, 16, testaddrs);
-    
-    /*static int length = 39;
+    */
+    static int length = 39;
     static int addrs[] = {
         0,  4,  8,  12, 16, 20, 24, 28,32, 36, 40, 44, 48, 52, 56, 60,64, 68, 72,
         76, 80, 0,  4,  8, 12, 16, 71, 3,  41, 81, 39, 38, 71, 15, 39, 11, 51, 57, 41};
-    
-    Cache cache1 = createCache(128, 16, 8);//
+    //a 128-byte, direct-mapped cache with 8-byte cache lines (cache blocks)
+    Cache cache1 = createCache(128, 16, 8);
+    //a 64-byte, 2-way set associative cache with 8-byte cache lines (cache blocks)
     Cache cache2 = createCache(64,  2, 8);
-    Cache cache3 = createCache(128, 8, 16);//
+    //a 128-byte, direct-mapped cache with 16-byte cache lines (cache blocks)
+    Cache cache3 = createCache(128, 8, 16);
+    //a 64-byte, fully associative cache with 8-byte cache lines (cache blocks)
     Cache cache4 = createCache(64,  1, 8);
     
     printVisitAll(&cache1, length, addrs);
     printVisitAll(&cache2, length, addrs);
     printVisitAll(&cache3, length, addrs);
     printVisitAll(&cache4, length, addrs);
-    */
+    
     return 0;
 }

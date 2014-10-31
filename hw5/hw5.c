@@ -99,7 +99,8 @@ int isHit(Set *set, int tag, int offset)
 void printVisitAll(Cache *cache, int len, int addrs[])
 {
     printf("Cache: (%i, %i, %i) \n",cache->s,cache->n,cache->l);
-    printf("addr  tag  index word_offset hit/miss\n");
+    //printf("addr  tag  index word_offset hit/miss\n");
+    printf("[\n");
     // compute number of rows per set
     int rows = (cache->s / cache->l) / cache->n;
     
@@ -140,10 +141,13 @@ void printVisitAll(Cache *cache, int len, int addrs[])
         // test for hit
         int hit = isHit(set, tag, offset);
         
-        // log to console
-        printf(" %2d    %2d     %2d       %2d       %s \n", addrs[i],tag, index, offset, hit ? "hit" : "miss");
+        // The output of this program
+        //test 
+        //printf(" %2d    %2d     %2d       %2d       %s \n", addrs[i],tag, index, offset, hit ? "HIT" : "MISS");
+        printf("(%i : %s)\n", addrs[x], hit ? "HIT" : "MISS");
     }
-    printf("\n");
+    
+    printf("]\n\n");
 }
 
 int main(int argc, char *argv[])
